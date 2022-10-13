@@ -18,12 +18,12 @@ namespace IMS.WebApp.Pages.Inventories
         protected Inventory inventory = new();
         private readonly string _inventoriesUrl = "/inventories";
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             inventory = await ViewInventoryByIdUseCase.ExecuteAsync(InventoryId);
         }
 
-        protected async Task SaveInventory()
+        protected async Task EditInventory()
         {
             try
             {
