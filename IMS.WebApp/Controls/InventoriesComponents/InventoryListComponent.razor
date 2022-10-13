@@ -1,0 +1,23 @@
+﻿@inherits InventoryListComponentBase
+
+<div class="pt-4">
+    @if (Inventories == null || Inventories.Count() < 0)
+    {
+        <ItemsNotFoundComponent />
+    } else
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <InventoryListItemComponent Inventories="Inventories" />
+            </tbody>
+        </table>
+    }
+</div>

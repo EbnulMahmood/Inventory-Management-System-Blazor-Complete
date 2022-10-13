@@ -1,0 +1,16 @@
+﻿@page "/inventories"
+@inherits InventoryListBase
+
+<PageTitle>Inventories</PageTitle>
+
+<h3>Inventory List</h3>
+
+<SearchInventoryComponent OnSearchInventory="OnSearchInventory" />
+<InventoryListComponent SearchTerm="@SearchTerm" />
+<button
+    type="button"
+    class="btn btn-primary pt-2"
+    @onclick="AddInventory"
+>
+    Add Inventory
+</button>

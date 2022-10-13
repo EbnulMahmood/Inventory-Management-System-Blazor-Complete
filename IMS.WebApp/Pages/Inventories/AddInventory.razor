@@ -1,0 +1,42 @@
+﻿@page "/addInventory"
+
+@inherits AddInventoryBase
+
+<PageTitle>Add Inventory</PageTitle>
+
+<h3>Add Inventory</h3>
+
+<div class="pt-4">
+    <EditForm Model="inventory" OnValidSubmit="async () => await SaveInventory()">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name"
+                        @bind-Value="inventory.Name"
+                        class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="quantity" class="form-label">Quantity</label>
+            <InputNumber id="quantity"
+                       @bind-Value="inventory.Quantity"
+                       class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="price" class="form-label">Price</label>
+            <InputNumber id="price"
+                         @bind-Value="inventory.Price"
+                         class="form-control" />
+        </div>
+        <div class="form-group pt-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button
+                @onclick="NavigateToInventories"
+                type="button"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </button>
+        </div>
+    </EditForm>
+</div>
