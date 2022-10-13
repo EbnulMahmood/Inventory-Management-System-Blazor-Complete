@@ -1,0 +1,19 @@
+﻿@inherits ProductItemComponentBase
+
+<tr>
+    <td>@Product.Name</td>
+    <td>@Product.Quantity</td>
+    <td>@Product.Price.ToString("c")</td>
+    <td>
+        <button @onclick="@(() => EditProduct(@Product.Id))"
+                type="button"
+                class="btn btn-light btn-info">
+            Edit
+        </button>
+        <button @onclick="@(() => DeleteProduct(@Product))"
+                type="button"
+                class="btn btn-light btn-danger">
+            Delete
+        </button>
+    </td>
+</tr>

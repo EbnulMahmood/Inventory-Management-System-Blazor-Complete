@@ -1,0 +1,14 @@
+﻿@inherits InventoryItemComponentBase
+
+<tr>
+    <td>@Inventory.Name</td>
+    <td>@Inventory.Quantity</td>
+    <td>@Inventory.Price.ToString("c")</td>
+    <td>
+        <button @onclick="@(() => EditInventory(@Inventory.Id))"
+                type="button"
+                class="btn btn-light btn-info">
+            Edit
+        </button>
+    </td>
+</tr>

@@ -2,17 +2,5 @@
 
 @foreach (var item in Inventories)
 {
-    <tr>
-        <td>@item.Name</td>
-        <td>@item.Quantity</td>
-        <td>@item.Price.ToString("c")</td>
-        <td>
-            <button 
-                @onclick="@(() => EditInventory(@item.Id))"
-                type="button"
-                class="btn btn-light btn-info">
-                Edit
-            </button>
-        </td>
-    </tr>
+    <InventoryItemComponent Inventory="item" />
 }

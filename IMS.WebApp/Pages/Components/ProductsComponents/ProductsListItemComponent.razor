@@ -2,17 +2,5 @@
 
 @foreach (var item in Products)
 {
-    <tr>
-        <td>@item.Name</td>
-        <td>@item.Quantity</td>
-        <td>@item.Price.ToString("c")</td>
-        <td>
-            <button 
-                @onclick="@(() => EditProduct(@item.Id))"
-                type="button"
-                class="btn btn-light btn-info">
-                Edit
-            </button>
-        </td>
-    </tr>
+    <ProductItemComponent Product="item" />
 }

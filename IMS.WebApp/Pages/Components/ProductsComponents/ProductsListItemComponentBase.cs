@@ -7,13 +7,5 @@ namespace IMS.WebApp.Pages.Components.ProductsComponents
     {
         [Parameter]
         public IEnumerable<Product> Products { get; set; } = Enumerable.Empty<Product>();
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-        private readonly string _editProductUrl = "/editProduct";
-
-        public void EditProduct(int id)
-        {
-            NavigationManager.NavigateTo($"{_editProductUrl}/{id}");
-        }
     }
 }
