@@ -1,9 +1,9 @@
 ﻿using IMS.CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Controls
+namespace IMS.WebApp.Pages.Components.InventoriesComponents
 {
-    public class ProductListItemComponentBase : ComponentBase
+    public class InventoryListItemComponentBase : ComponentBase
     {
         [Parameter]
         public IEnumerable<Inventory> Inventories { get; set; } = Enumerable.Empty<Inventory>();

@@ -2,9 +2,9 @@
 using IMS.UseCases.Inventories.Interfaces;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Controls
+namespace IMS.WebApp.Pages.Components.InventoriesComponents
 {
-    public class ProductListComponentBase : ComponentBase
+    public class InventoryListComponentBase : ComponentBase
     {
         [Inject]
         public IViewInventoriesByNameUseCase ViewInventoriesByNameUse { get; private set; }

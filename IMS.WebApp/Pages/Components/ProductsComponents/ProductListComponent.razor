@@ -1,7 +1,7 @@
 ﻿@inherits ProductListComponentBase
 
 <div class="pt-4">
-    @if (Inventories == null || Inventories.Count() < 0)
+    @if (Products == null || Products.Count() < 0)
     {
         <ItemsNotFoundComponent />
     } else
@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <InventoryListItemComponent Inventories="Inventories" />
+                <ProductsListItemComponent Products="Products" />
             </tbody>
         </table>
     }

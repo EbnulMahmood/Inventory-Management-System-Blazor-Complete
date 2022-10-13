@@ -1,6 +1,6 @@
-﻿@inherits ProductListItemComponentBase
+﻿@inherits ProductsListItemComponentBase
 
-@foreach (var item in Inventories)
+@foreach (var item in Products)
 {
     <tr>
         <td>@item.Name</td>
@@ -8,7 +8,7 @@
         <td>@item.Price.ToString("c")</td>
         <td>
             <button 
-                @onclick="@(() => EditInventory(@item.Id))"
+                @onclick="@(() => EditProduct(@item.Id))"
                 type="button"
                 class="btn btn-light btn-info">
                 Edit

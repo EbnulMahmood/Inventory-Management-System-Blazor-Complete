@@ -1,0 +1,14 @@
+﻿@page "/products"
+@inherits ProductListBase
+
+<PageTitle>Products</PageTitle>
+
+<h3>Product List</h3>
+
+<SearchProductComponent OnSearchProduct="OnSearchProduct" />
+<ProductListComponent SearchTerm="@SearchTerm" />
+<button type="button"
+        class="btn btn-primary pt-2"
+        @onclick="AddProduct">
+    Add Product
+</button>

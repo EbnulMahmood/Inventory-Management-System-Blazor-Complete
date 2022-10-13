@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Controls
+namespace IMS.WebApp.Pages.Components.InventoriesComponents
 {
-    public class SearchProductComponentBase : ComponentBase
+    public class SearchInventoryComponentBase : ComponentBase
     {
         protected string inventoryNameToSearch = string.Empty;
         [Parameter]
