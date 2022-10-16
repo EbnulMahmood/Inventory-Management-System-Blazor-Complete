@@ -1,20 +1,30 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using IMS.CoreBusiness.Entities;
+using IMS.UseCases.Inventories.Interfaces;
+using Microsoft.AspNetCore.Components;
 
 namespace IMS.WebApp.Pages.Inventories
 {
     public class InventoryListBase : ComponentBase
     {
-        protected string SearchTerm { get; private set; } = string.Empty;
-        [Inject]
-        public NavigationManager NavigationManager { get; private set; }
-        private readonly string _addInventoryUrl = "addInventory";
+        public IEnumerable<Inventory> Inventories { get; set; } = Enumerable.Empty<Inventory>();
+        private readonly string _addInventoryUrl = "/addInventory";
 
-        protected void OnSearchInventory(string searchTerm)
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase { get; private set; }
+
+        protected override async Task OnInitializedAsync()
         {
-            SearchTerm = searchTerm;
+            Inventories = await ViewInventoriesByNameUseCase.ExecuteAsync();
         }
 
-        protected void AddInventory()
+        public void OnSearchInventories(IEnumerable<Inventory> inventories)
+        {
+            Inventories = inventories;
+        }
+
+        protected void NavigateToAddInventory()
         {
             NavigationManager.NavigateTo(_addInventoryUrl);
         }

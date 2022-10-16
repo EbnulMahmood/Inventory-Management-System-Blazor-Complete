@@ -7,7 +7,7 @@
 <h3>Add Inventory</h3>
 
 <div class="pt-4">
-    <EditForm Model="inventory" OnValidSubmit="async () => await SaveInventory()">
+    <EditForm Model="inventory" OnValidSubmit="async () => await OnValidSubmit()">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="form-group">

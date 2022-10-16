@@ -1,7 +1,7 @@
 ﻿using IMS.CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Pages.Components.ProductsComponents
+namespace IMS.WebApp.Pages.Components.InventoriesComponents
 {
     public class InventoryItemComponentBase : ComponentBase
     {
@@ -9,8 +9,7 @@ namespace IMS.WebApp.Pages.Components.ProductsComponents
         public Inventory Inventory { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        private readonly string _editInventoryUrl = "/editInventory";
-        private readonly string _deleteInventoryUrl = "/deleteInventory";
+        private const string _editInventoryUrl = "/editInventory";
 
         public void EditInventory(int id)
         {

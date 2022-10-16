@@ -5,10 +5,34 @@
 
 <h3>Product List</h3>
 
-<SearchProductComponent OnSearchProduct="OnSearchProduct" />
-<ProductListComponent SearchTerm="@SearchTerm" />
-<button type="button"
-        class="btn btn-primary pt-2"
-        @onclick="AddProduct">
+<div class="pt-4">
+    <ViewProductsComponent OnSearchProducts="OnSearchProducts" />
+    @if (Products == null || Products.Count() < 0)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Products)
+                {
+                    <ProductItemComponent Product="item" />
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<button @onclick="NavigateToAddProduct"
+        type="button"
+        class="btn btn-primary pt-2">
     Add Product
 </button>

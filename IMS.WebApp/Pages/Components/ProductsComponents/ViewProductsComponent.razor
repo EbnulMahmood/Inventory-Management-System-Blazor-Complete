@@ -1,0 +1,13 @@
+﻿@inherits ViewProductsComponentBase
+
+<div class="input-group">
+    <input type="search"
+           @bind-value="productNameToSearch"
+           placeholder="Type product name here to search"
+           class="form-control" />
+    <button type="button"
+            @onclick="async () => await ViewProducts()"
+            class="btn btn-primary input-group-text">
+        Search
+    </button>
+</div>

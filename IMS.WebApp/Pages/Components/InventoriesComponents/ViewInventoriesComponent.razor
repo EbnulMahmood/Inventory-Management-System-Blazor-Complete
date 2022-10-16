@@ -1,0 +1,14 @@
+﻿@inherits ViewInventoriesComponentBase
+
+<div class="input-group">
+    <input type="search"
+           @bind-value="inventoryNameToSearch"
+           placeholder="Type inventory name here to search"
+           class="form-control" />
+    <button type="button"
+            @onclick="async () => await ViewInventories()"
+            class="btn btn-primary input-group-text">
+        Search
+    </button>
+</div>
+

@@ -1,20 +1,29 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using IMS.CoreBusiness.Entities;
+using IMS.UseCases.Products.Interfaces;
+using Microsoft.AspNetCore.Components;
 
 namespace IMS.WebApp.Pages.Products
 {
     public class ProductListBase : ComponentBase
     {
-        protected string SearchTerm { get; private set; } = string.Empty;
+        public IEnumerable<Product> Products { get; set; } = Enumerable.Empty<Product>();
+        private readonly string _addProductUrl = "/addProduct";
         [Inject]
-        public NavigationManager NavigationManager { get; private set; }
-        private readonly string _addProductUrl = "addProduct";
+        public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public IViewProductsByNameUseCase ViewProductsByNameUseCase { get; private set; }
 
-        protected void OnSearchProduct(string searchTerm)
+        protected override async Task OnInitializedAsync()
         {
-            SearchTerm = searchTerm;
+            Products = await ViewProductsByNameUseCase.ExecuteAsync();
         }
 
-        protected void AddProduct()
+        public void OnSearchProducts(IEnumerable<Product> products)
+        {
+            Products = products;
+        }
+
+        protected void NavigateToAddProduct()
         {
             NavigationManager.NavigateTo(_addProductUrl);
         }

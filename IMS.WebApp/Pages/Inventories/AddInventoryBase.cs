@@ -1,7 +1,6 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.Inventories.Interfaces;
 using Microsoft.AspNetCore.Components;
-using System.ComponentModel.DataAnnotations;
 
 namespace IMS.WebApp.Pages.Inventories
 {
@@ -11,10 +10,15 @@ namespace IMS.WebApp.Pages.Inventories
         public IAddInventoryUseCase AddInventoryUseCase { get; private set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        protected Inventory inventory = new();
+        protected Inventory inventory;
         private readonly string _inventoriesUrl = "/inventories";
 
-        protected async Task SaveInventory()
+        protected override void OnInitialized()
+        {
+            inventory = new();
+        }
+
+        protected async Task OnValidSubmit()
         {
             try
             {

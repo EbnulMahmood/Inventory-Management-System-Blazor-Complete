@@ -5,12 +5,35 @@
 
 <h3>Inventory List</h3>
 
-<SearchInventoryComponent OnSearchInventory="OnSearchInventory" />
-<InventoryListComponent SearchTerm="@SearchTerm" />
-<button
-    type="button"
-    class="btn btn-primary pt-2"
-    @onclick="AddInventory"
+<div class="pt-4">
+    <ViewInventoriesComponent OnSearchInventories="OnSearchInventories" />
+    @if (Inventories == null || Inventories.Count() < 0)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Inventories)
+                {
+                    <InventoryItemComponent Inventory="item" />
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<button @onclick="NavigateToAddInventory"
+        type="button"
+        class="btn btn-primary pt-2"
 >
     Add Inventory
 </button>

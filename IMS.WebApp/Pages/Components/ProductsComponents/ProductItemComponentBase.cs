@@ -17,9 +17,9 @@ namespace IMS.WebApp.Pages.Components.ProductsComponents
             NavigateToUrl(_editProductUrl, id);
         }
 
-        public void DeleteProduct(Product product)
+        public void DeleteProduct(int id)
         {
-            NavigateToUrl(_deleteProductUrl, product.Id);
+            NavigateToUrl(_deleteProductUrl, id);
         }
 
         private void NavigateToUrl(string url, int id)
