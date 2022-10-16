@@ -9,6 +9,7 @@ namespace IMS.UseCases.PluginIRepositories
 {
     public interface IProductRepository
     {
+        Task AddProductAsync(Product product);
         Task<IEnumerable<Product>> ListProductsByNameAsync(string name);
     }
 }

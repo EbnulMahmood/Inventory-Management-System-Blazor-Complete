@@ -19,6 +19,15 @@ namespace IMS.Plugins.EFCore.Repositories
             _context = context;
         }
 
+        public async Task AddProductAsync(Product product)
+        {
+            if (await _context.Products.AnyAsync(x => x.Name.Contains(product.Name, StringComparison.OrdinalIgnoreCase)))
+                throw new Exception("Product with same name already exists");
+
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Product>> ListProductsByNameAsync(string name)
         {
             return await _context.Products.Where(x => x.Name

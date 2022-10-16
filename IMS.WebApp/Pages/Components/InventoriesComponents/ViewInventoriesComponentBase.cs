@@ -9,14 +9,26 @@ namespace IMS.WebApp.Pages.Components.InventoriesComponents
         [Inject]
         public IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase { get; private set; }
         protected string inventoryNameToSearch = string.Empty;
-        protected IEnumerable<Inventory> Inventories { get; private set; } = Enumerable.Empty<Inventory>();
+        protected IEnumerable<Inventory>? Inventories { get; private set; }
         [Parameter]
         public EventCallback<IEnumerable<Inventory>> OnSearchInventories { get; set; }
+        [Parameter]
+        public EventCallback<Inventory> OnSelectInventory { get; set; }
+        [Parameter]
+        public bool DisplaySearchResult { get; set; } = false;
+        public Inventory? SelectedInventory { get; private set; }
 
         protected async Task ViewInventories()
         {
             Inventories = await ViewInventoriesByNameUseCase.ExecuteAsync(inventoryNameToSearch);
             await OnSearchInventories.InvokeAsync(Inventories);
+            SelectedInventory = null;
+        }
+
+        protected async Task SelectInventory(Inventory inventory)
+        {
+            SelectedInventory = inventory;
+            await OnSelectInventory.InvokeAsync(inventory);
         }
     }
 }

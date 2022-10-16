@@ -11,4 +11,17 @@
         Search
     </button>
 </div>
-
+@if (DisplaySearchResult && Inventories != null && SelectedInventory == null)
+{
+    <div style="overflow-y:auto; max-height:300px;">
+        <ui style="list-style-type:none">
+            @foreach (var item in Inventories)
+            {
+                <li @key="@item.Id"
+                    @onclick="async () => await SelectInventory(item)"
+                    style="cursor:pointer"
+                >@item.Name</li>
+            }
+        </ui>
+    </div>
+}
