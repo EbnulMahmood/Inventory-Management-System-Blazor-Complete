@@ -28,6 +28,8 @@
                          @bind-Value="product.Price"
                          class="form-control" />
         </div>
+        <ProductInventoriesComponent @ref="productInventoriesComponent"
+                                     OnInventorySelected="OnInventorySelected" />
         <div class="form-group pt-2">
             <button type="submit" class="btn btn-primary">Save</button>
             <button @onclick="NavigateToProducts"

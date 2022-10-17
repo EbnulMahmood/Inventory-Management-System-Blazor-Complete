@@ -11,9 +11,11 @@
         Search
     </button>
 </div>
+
 @if (DisplaySearchResult && Inventories != null && SelectedInventory == null)
 {
-    <div style="overflow-y:auto; max-height:300px;">
+    <div class="pt-2" 
+        style="overflow-y:auto; max-height:300px; border:1px solid silver">
         <ui style="list-style-type:none">
             @foreach (var item in Inventories)
             {

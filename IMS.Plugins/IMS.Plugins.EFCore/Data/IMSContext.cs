@@ -19,6 +19,19 @@ namespace IMS.Plugins.EFCore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductInventory>()
+                .HasKey(pi => new { pi.ProductId, pi.InventoryId });
+
+            modelBuilder.Entity<ProductInventory>()
+                .HasOne(pi => pi.Product)
+                .WithMany(p => p.ProductInventories)
+                .HasForeignKey(pi => pi.ProductId);
+            
+            modelBuilder.Entity<ProductInventory>()
+                .HasOne(pi => pi.Inventory)
+                .WithMany(i => i.ProductInventories)
+                .HasForeignKey(pi => pi.InventoryId);
+
             modelBuilder.Entity<Inventory>().HasData(
                 new Inventory() { Id = 1, Name = "Car Engine", Quantity = 10, Price = 200 },
                 new Inventory() { Id = 2, Name = "Car Body", Quantity = 10, Price = 300 },
@@ -34,6 +47,21 @@ namespace IMS.Plugins.EFCore.Data
                 new Product() { Id = 3, Name = "Product 3", Quantity = 30, Price = 1090 },
                 new Product() { Id = 4, Name = "Product 4", Quantity = 40, Price = 4500 },
                 new Product() { Id = 5, Name = "Product 5", Quantity = 25, Price = 4000 }
+            );
+
+            modelBuilder.Entity<ProductInventory>().HasData(
+                new ProductInventory() { ProductId = 1, InventoryId = 1, InventoryQuantity = 1},
+                new ProductInventory() { ProductId = 1, InventoryId = 2, InventoryQuantity = 1},
+                new ProductInventory() { ProductId = 1, InventoryId = 3, InventoryQuantity = 4},
+                new ProductInventory() { ProductId = 1, InventoryId = 4, InventoryQuantity = 5}
+            );
+
+            modelBuilder.Entity<ProductInventory>().HasData(
+                new ProductInventory() { ProductId = 2, InventoryId = 5, InventoryQuantity = 1 },
+                new ProductInventory() { ProductId = 2, InventoryId = 2, InventoryQuantity = 1 },
+                new ProductInventory() { ProductId = 2, InventoryId = 3, InventoryQuantity = 4 },
+                new ProductInventory() { ProductId = 2, InventoryId = 4, InventoryQuantity = 4 },
+                new ProductInventory() { ProductId = 2, InventoryId = 6, InventoryQuantity = 1 }
             );
         }
     }

@@ -3,5 +3,40 @@
 <div class="form-group">
     <label for="invantories" class="form-label">Invantories</label>
     <ViewInventoriesComponent DisplaySearchResult=true
-                              OnSelectInventory="() => OnSelectInventory(product)" />
+                              OnSelectInventory="OnSelectInventory" />
 </div>
+
+@if (ProductInventories != null && ProductInventories.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ProductInventories)
+            {
+                <tr>
+                    <td>@item.Inventory.Name</td>
+                    <td>
+                        <input type="number"
+                               min="0"
+                               @bind-value="item.InventoryQuantity"
+                               @bind-value:event="oninput"
+                               @onchange="OnInventoryQtyChanged"/>
+                    </td>
+                    <td>
+                        <button class="btn btn-link"
+                                type="button"
+                                @onclick="() => RemoveInventory(item)">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
