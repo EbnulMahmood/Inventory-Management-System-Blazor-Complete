@@ -2,7 +2,8 @@
 
 <div class="input-group">
     <input type="search"
-           @bind-value="inventoryNameToSearch"
+           @bind-value="InventoryNameToSearch"
+           @bind-value:event="oninput"
            placeholder="Type inventory name here to search"
            class="form-control" />
     <button type="button"
