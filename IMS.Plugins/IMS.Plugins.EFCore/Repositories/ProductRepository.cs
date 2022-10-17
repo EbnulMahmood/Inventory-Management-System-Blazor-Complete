@@ -28,12 +28,42 @@ namespace IMS.Plugins.EFCore.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteProductAsync(int productId)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) return;
+
+            product.IsActive = false;
+            _context.Products.Update(product);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            return await _context.Products
+                .Include(x => x.ProductInventories)
+                .ThenInclude(x => x.Inventory)
+                .FirstOrDefaultAsync(x => x.Id == productId);
+        }
+
         public async Task<IEnumerable<Product>> ListProductsByNameAsync(string name)
         {
-            return await _context.Products.Where(x => x.Name
+            return await _context.Products.Where(x => (x.Name
                 .Contains(name, StringComparison.OrdinalIgnoreCase) ||
-                string.IsNullOrWhiteSpace(name)
+                string.IsNullOrWhiteSpace(name)) &&
+                x.IsActive == true
             ).ToListAsync();
+        }
+
+        public async Task UpdateProductAsync(Product product)
+        {
+            if (await _context.Products.AnyAsync(x => x.Id != product.Id &&
+                x.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase)))
+                throw new Exception($"{product.Name} with same name already exists");
+
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
         }
     }
 }

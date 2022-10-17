@@ -15,12 +15,22 @@ namespace IMS.WebApp.Pages.Products
 
         protected override async Task OnInitializedAsync()
         {
-            Products = await ViewProductsByNameUseCase.ExecuteAsync();
+            await LoadProducts();
         }
 
         public void OnSearchProducts(IEnumerable<Product> products)
         {
             Products = products;
+        }
+
+        public async Task OnProductDeleted()
+        {
+            await LoadProducts();
+        }
+
+        public async Task LoadProducts()
+        {
+            Products = await ViewProductsByNameUseCase.ExecuteAsync();
         }
 
         protected void NavigateToAddProduct()

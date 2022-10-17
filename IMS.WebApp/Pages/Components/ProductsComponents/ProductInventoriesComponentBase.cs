@@ -7,8 +7,8 @@ namespace IMS.WebApp.Pages.Components.ProductsComponents
     {
         [Parameter]
         public EventCallback<List<ProductInventory>> OnInventorySelected { get; set; }
-        public List<ProductInventory> ProductInventories { get; private set; } = new List<ProductInventory>();
-
+        [Parameter]
+        public List<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
         protected async Task OnInventoryQtyChanged()
         {
             await OnInventorySelected.InvokeAsync(ProductInventories);

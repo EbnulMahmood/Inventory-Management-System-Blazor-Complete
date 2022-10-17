@@ -13,6 +13,8 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -28,6 +30,8 @@
                                @bind-value:event="oninput"
                                @onchange="OnInventoryQtyChanged"/>
                     </td>
+                    <td>@item.Inventory.Price</td>
+                    <td>@(item.Inventory.Price * @item.InventoryQuantity)</td>
                     <td>
                         <button class="btn btn-link"
                                 type="button"

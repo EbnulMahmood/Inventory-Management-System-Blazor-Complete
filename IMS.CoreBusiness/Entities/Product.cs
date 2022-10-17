@@ -19,14 +19,20 @@ namespace IMS.CoreBusiness.Entities
         [Range(1, int.MaxValue, ErrorMessage = "Price must be greater than 0")]
         [Product_EnsurePriceIsGreaterThanInventoriesPrice]
         public double Price { get; set; }
+        public bool IsActive { get; set; } = true;
         public List<ProductInventory>? ProductInventories { get; set; }
+
+        public double TotalInventoryCost()
+        { 
+            return ProductInventories
+                .Sum(x => x.Inventory?.Price * x.InventoryQuantity ?? 0);
+        }
 
         public bool ValidatePricing()
         {
             if (ProductInventories == null || ProductInventories.Count <= 0) return true;
 
-            double priceOfAllInventories = ProductInventories.Sum(x => x.Inventory?.Price * x.InventoryQuantity ?? 0);
-            if (priceOfAllInventories > Price) return false;
+            if (TotalInventoryCost() > Price) return false;
 
             return true;
         }

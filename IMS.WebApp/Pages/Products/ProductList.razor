@@ -25,7 +25,8 @@
             <tbody>
                 @foreach (var item in Products)
                 {
-                    <ProductItemComponent Product="item" />
+                    <ProductItemComponent Product="item"
+                                  OnProductDeleted="OnProductDeleted" />
                 }
             </tbody>
         </table>
