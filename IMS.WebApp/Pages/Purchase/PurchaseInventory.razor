@@ -1,0 +1,50 @@
+﻿@page "/purchase"
+@inherits PurchaseInventoryBase
+
+<PageTitle>Purchase Inventory</PageTitle>
+
+<h3>Purchase Inventory List</h3>
+
+<div class="pt-4">
+    @if (purchaseViewModel == null)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <EditForm Model="purchaseViewModel" OnValidSubmit="async () => await OnValidSubmit()">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="purchase-order" class="form-label">Purchase Order</label>
+                <InputText id="purchase-order"
+                       @bind-Value="purchaseViewModel.PurchaseOrder"
+                       class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="inventory" class="form-label">Inventory to Purchase</label>
+                <ViewInventoriesComponent OnSelectInventory="OnSelectInventory"
+                                          DisplaySearchResult="true" />
+                <InputText id="inventory" 
+                           disabled 
+                           class="form-control" 
+                           @bind-Value="purchaseViewModel.InventoryName" />
+                <input type="hidden" value="@purchaseViewModel.InventoryId" />
+            </div>
+            <div class="form-group">
+                <label for="qty" class="form-label">Quantity</label>
+                <InputNumber id="qty"
+                         @bind-Value="purchaseViewModel.QuantityToPurchase"
+                         class="form-control" />
+            </div>
+            <div class="form-group pt-2">
+                <button type="submit" class="btn btn-primary">Purchase</button>
+                <button @onclick="NavigateToInventories"
+                    type="button"
+                    class="btn btn-secondary">
+                    Cancel
+                </button>
+            </div>
+        </EditForm>
+    }
+</div>

@@ -16,14 +16,23 @@
 @if (DisplaySearchResult && Inventories != null && SelectedInventory == null)
 {
     <div class="pt-2" 
-        style="overflow-y:auto; max-height:300px; border:1px solid silver">
+        style="overflow-y:auto; max-height:300px; border:1px solid silver; padding-top: 5px;">
         <ui style="list-style-type:none">
             @foreach (var item in Inventories)
             {
                 <li @key="@item.Id"
                     @onclick="async () => await SelectInventory(item)"
-                    style="cursor:pointer"
-                >@item.Name</li>
+                    style="cursor:pointer; display:inline"
+                >
+                    <div class="row gap-3  p-2 bg-light border">
+                        <div class="col-md-2">
+                            @item.Name
+                        </div>
+                        <div class="col-md-auto">
+                            $@item.Price
+                        </div>
+                    </div>
+                </li>
             }
         </ui>
     </div>

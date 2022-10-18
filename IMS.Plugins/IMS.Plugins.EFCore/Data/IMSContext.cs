@@ -16,6 +16,8 @@ namespace IMS.Plugins.EFCore.Data
 
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
+        public DbSet<ProductTransaction> ProductTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
