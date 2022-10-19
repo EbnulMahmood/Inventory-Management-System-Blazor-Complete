@@ -23,13 +23,13 @@ namespace IMS.WebApp.Pages.Components.InventoriesComponents
             }
         }
         protected IEnumerable<Inventory>? Inventories { get; private set; }
+        public Inventory? SelectedInventory { get; private set; }
+        [Parameter]
+        public bool DisplaySearchResult { get; set; } = false;
         [Parameter]
         public EventCallback<IEnumerable<Inventory>> OnSearchInventories { get; set; }
         [Parameter]
         public EventCallback<Inventory> OnSelectInventory { get; set; }
-        [Parameter]
-        public bool DisplaySearchResult { get; set; } = false;
-        public Inventory? SelectedInventory { get; private set; }
 
         protected async Task ViewInventories()
         {

@@ -1,0 +1,50 @@
+﻿@page "/produce"
+@inherits ProduceProductBase
+
+<PageTitle>Produce Product</PageTitle>
+
+<h3>Produce Product List</h3>
+
+<div class="pt-4">
+    @if (produceViewModel == null)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <EditForm Model="produceViewModel" OnValidSubmit="async () => await OnValidSubmit()">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="produce-order" class="form-label">Production Number</label>
+                <InputText id="produce-order"
+                       @bind-Value="produceViewModel.ProductionNumber"
+                       class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="inventory" class="form-label">Product to Produce</label>
+                <ViewProductsComponent OnSelectProduct="OnSelectProduct"
+                                      DisplaySearchResult="true" />
+                <InputText id="product"
+                       disabled
+                       class="form-control"
+                       @bind-Value="produceViewModel.ProductName" />
+                <input type="hidden" value="@produceViewModel.ProductId" />
+            </div>
+            <div class="form-group">
+                <label for="qty" class="form-label">Quantity</label>
+                <InputNumber id="qty"
+                         @bind-Value="produceViewModel.QuantityToProduce"
+                         class="form-control" />
+            </div>
+            <div class="form-group pt-2">
+                <button type="submit" class="btn btn-primary">Produce</button>
+                <button @onclick="NavigateToProducts"
+                    type="button"
+                    class="btn btn-secondary">
+                    Cancel
+                </button>
+            </div>
+        </EditForm>
+    }
+</div>

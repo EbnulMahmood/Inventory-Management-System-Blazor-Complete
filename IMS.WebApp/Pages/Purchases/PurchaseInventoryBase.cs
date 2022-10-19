@@ -3,7 +3,7 @@ using IMS.UseCases.Purchases.Interfaces;
 using IMS.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Pages.Purchase
+namespace IMS.WebApp.Pages.Purchases
 {
     public class PurchaseInventoryBase : ComponentBase
     {

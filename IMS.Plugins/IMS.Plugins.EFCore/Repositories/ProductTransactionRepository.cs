@@ -14,19 +14,18 @@ namespace IMS.Plugins.EFCore.Repositories
     public class ProductTransactionRepository : IProductTransactionRepository
     {
         private readonly IMSContext _context;
+        private readonly IProductRepository _productRepository;
 
-        public ProductTransactionRepository(IMSContext context)
+        public ProductTransactionRepository(IMSContext context, IProductRepository productRepository)
         {
             _context = context;
+            _productRepository = productRepository;
         }
 
         public async Task ProduceAsync(string productionNumber, Product product, int quantity,
             double price, string doneBy)
         {
-            var productToSave = await _context.Products
-                .Include(x => x.ProductInventories)
-                .ThenInclude(x => x.Inventory)
-                .FirstOrDefaultAsync(x => x.Id == product.Id);
+            var productToSave = await _productRepository.GetProductByIdAsync(product.Id);
             if (productToSave != null)
             {
                 foreach(var item in productToSave.ProductInventories)

@@ -3,17 +3,17 @@ using IMS.Plugins.EFCore.Repositories;
 using IMS.UseCases.Inventories;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginIRepositories;
+using IMS.UseCases.Produces;
+using IMS.UseCases.Produces.Interfaces;
+using IMS.UseCases.Produces.Validations;
 using IMS.UseCases.Products;
 using IMS.UseCases.Products.Interfaces;
 using IMS.UseCases.Purchases;
 using IMS.UseCases.Purchases.Interfaces;
 using IMS.WebApp.Areas.Identity;
 using IMS.WebApp.Data;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +39,7 @@ builder.Services.AddDbContext<IMSContext>(options =>
 builder.Services.AddTransient<IInventoryRepository, InventoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IInventoryTransactionRepository, InventoryTransactionRepository>();
+builder.Services.AddTransient<IProductTransactionRepository, ProductTransactionRepository>();
 
 // Use Cases
 // Inventories
@@ -54,6 +55,9 @@ builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
 builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
 // Purchase Inventory
 builder.Services.AddTransient<IPurchaseInventoryUseCase, PurchaseInventoryUseCase>();
+// Produce Product
+builder.Services.AddTransient<IValidateEnoughInventoriesForProducingUseCase, ValidateEnoughInventoriesForProducingUseCase>();
+builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
 
 var app = builder.Build();
 
