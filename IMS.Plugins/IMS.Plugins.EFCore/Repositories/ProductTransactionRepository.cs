@@ -2,12 +2,6 @@
 using IMS.CoreBusiness.Enums;
 using IMS.Plugins.EFCore.Data;
 using IMS.UseCases.PluginIRepositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMS.Plugins.EFCore.Repositories
 {
@@ -47,6 +41,23 @@ namespace IMS.Plugins.EFCore.Repositories
                 UnitPrice = price
             });
 
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaleProductAsync(string salesOrderNumber, Product product, int quantity, double price, string doneBy)
+        {
+            await _context.ProductTransactions.AddAsync(new ProductTransaction()
+            {
+                SaleOrderNumber = salesOrderNumber,
+                ProductId = product.Id,
+                Product = product,
+                QuantityBefore = product.Quantity,
+                QuantityAfter = product.Quantity - quantity,
+                TransactionDate = DateTime.Now,
+                DoneBy = doneBy,
+                UnitPrice = price
+            });
+         
             await _context.SaveChangesAsync();
         }
     }

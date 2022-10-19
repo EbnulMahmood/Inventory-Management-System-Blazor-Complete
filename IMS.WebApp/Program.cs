@@ -10,6 +10,8 @@ using IMS.UseCases.Products;
 using IMS.UseCases.Products.Interfaces;
 using IMS.UseCases.Purchases;
 using IMS.UseCases.Purchases.Interfaces;
+using IMS.UseCases.Sales;
+using IMS.UseCases.Sales.Interfaces;
 using IMS.WebApp.Areas.Identity;
 using IMS.WebApp.Data;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -58,6 +60,8 @@ builder.Services.AddTransient<IPurchaseInventoryUseCase, PurchaseInventoryUseCas
 // Produce Product
 builder.Services.AddTransient<IValidateEnoughInventoriesForProducingUseCase, ValidateEnoughInventoriesForProducingUseCase>();
 builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
+// Sale Product
+builder.Services.AddTransient<ISaleProductUseCase, SaleProductUseCase>();
 
 var app = builder.Build();
 

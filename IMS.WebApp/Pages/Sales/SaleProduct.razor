@@ -1,0 +1,58 @@
+﻿@page "/sale"
+@inherits SaleProductBase
+
+<PageTitle>Sale Product</PageTitle>
+
+<MessageComponent Message="@Message" Type="@MessageType" />
+
+<h3>Sale Product List</h3>
+
+<div class="pt-4">
+    @if (saleViewModel == null)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <EditForm Model="saleViewModel" OnValidSubmit="async () => await OnValidSubmit()">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="produce-order" class="form-label">Sales Order Number</label>
+                <InputText id="produce-order"
+                       @bind-Value="saleViewModel.SalesOrderNumber"
+                       class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="inventory" class="form-label">Product to Sale</label>
+                <ViewProductsComponent OnSelectProduct="OnSelectProduct"
+                                   DisplaySearchResult="true" />
+                <InputText id="product"
+                       disabled
+                       class="form-control"
+                       @bind-Value="saleViewModel.ProductName" />
+                <input type="hidden" value="@saleViewModel.ProductId" />
+            </div>
+            <div class="form-group">
+                <label for="price" class="form-label">Price</label>
+                <InputNumber id="price"
+                         @bind-Value="saleViewModel.ProductPrice"
+                         class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="qty" class="form-label">Quantity</label>
+                <InputNumber id="qty"
+                         @bind-Value="saleViewModel.QuantityToSale"
+                         class="form-control" />
+            </div>
+            <div class="form-group pt-2">
+                <button type="submit" class="btn btn-primary">Sale</button>
+                <button @onclick="NavigateToProducts"
+                    type="button"
+                    class="btn btn-secondary">
+                    Cancel
+                </button>
+            </div>
+        </EditForm>
+    }
+</div>

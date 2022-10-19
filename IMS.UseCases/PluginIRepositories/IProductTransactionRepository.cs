@@ -11,5 +11,6 @@ namespace IMS.UseCases.PluginIRepositories
     {
         Task ProduceAsync(string productionNumber, Product product, int quantity,
             double price, string doneBy);
+        Task SaleProductAsync(string salesOrderNumber, Product product, int quantity, double price, string doneBy);
     }
 }
