@@ -1,5 +1,5 @@
 ﻿using IMS.CoreBusiness.Entities;
-using IMS.UseCases.Purchases.Interfaces;
+using IMS.UseCases.Activities.Purchases.Interfaces;
 using IMS.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 

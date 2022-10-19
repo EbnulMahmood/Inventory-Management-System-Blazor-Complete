@@ -3,20 +3,22 @@ using IMS.Plugins.EFCore.Repositories;
 using IMS.UseCases.Inventories;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginIRepositories;
-using IMS.UseCases.Produces;
-using IMS.UseCases.Produces.Interfaces;
-using IMS.UseCases.Produces.Validations;
+using IMS.UseCases.Activities.Produces;
+using IMS.UseCases.Activities.Produces.Interfaces;
+using IMS.UseCases.Activities.Produces.Validations;
 using IMS.UseCases.Products;
 using IMS.UseCases.Products.Interfaces;
-using IMS.UseCases.Purchases;
-using IMS.UseCases.Purchases.Interfaces;
-using IMS.UseCases.Sales;
-using IMS.UseCases.Sales.Interfaces;
+using IMS.UseCases.Activities.Purchases;
+using IMS.UseCases.Activities.Purchases.Interfaces;
+using IMS.UseCases.Activities.Sales;
+using IMS.UseCases.Activities.Sales.Interfaces;
 using IMS.WebApp.Areas.Identity;
 using IMS.WebApp.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using IMS.UseCases.Reports.Interfaces;
+using IMS.UseCases.Reports;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +64,8 @@ builder.Services.AddTransient<IValidateEnoughInventoriesForProducingUseCase, Val
 builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
 // Sale Product
 builder.Services.AddTransient<ISaleProductUseCase, SaleProductUseCase>();
+// Reports
+builder.Services.AddTransient<IListInventoryTransactionsUseCase, ListInventoryTransactionsUseCase>();
 
 var app = builder.Build();
 

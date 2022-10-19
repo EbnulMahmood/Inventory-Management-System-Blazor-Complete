@@ -1,6 +1,6 @@
 ﻿using IMS.CoreBusiness.Entities;
 
-namespace IMS.UseCases.Sales.Interfaces
+namespace IMS.UseCases.Activities.Sales.Interfaces
 {
     public interface ISaleProductUseCase
     {

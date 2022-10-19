@@ -1,6 +1,6 @@
 ﻿using IMS.CoreBusiness.Entities;
 
-namespace IMS.UseCases.Purchases.Interfaces
+namespace IMS.UseCases.Activities.Purchases.Interfaces
 {
     public interface IPurchaseInventoryUseCase
     {

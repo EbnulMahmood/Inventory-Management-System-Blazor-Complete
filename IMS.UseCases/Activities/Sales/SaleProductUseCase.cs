@@ -1,8 +1,8 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.PluginIRepositories;
-using IMS.UseCases.Sales.Interfaces;
+using IMS.UseCases.Activities.Sales.Interfaces;
 
-namespace IMS.UseCases.Sales
+namespace IMS.UseCases.Activities.Sales
 {
     public class SaleProductUseCase : ISaleProductUseCase
     {

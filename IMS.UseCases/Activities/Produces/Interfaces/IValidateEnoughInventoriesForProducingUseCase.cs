@@ -1,6 +1,6 @@
 ﻿using IMS.CoreBusiness.Entities;
 
-namespace IMS.UseCases.Produces.Interfaces
+namespace IMS.UseCases.Activities.Produces.Interfaces
 {
     public interface IValidateEnoughInventoriesForProducingUseCase
     {

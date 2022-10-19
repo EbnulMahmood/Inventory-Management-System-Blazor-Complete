@@ -1,13 +1,13 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.PluginIRepositories;
-using IMS.UseCases.Produces.Interfaces;
+using IMS.UseCases.Activities.Produces.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.UseCases.Produces.Validations
+namespace IMS.UseCases.Activities.Produces.Validations
 {
     public class ValidateEnoughInventoriesForProducingUseCase : IValidateEnoughInventoriesForProducingUseCase
     {

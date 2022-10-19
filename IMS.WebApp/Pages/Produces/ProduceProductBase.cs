@@ -1,5 +1,5 @@
 ﻿using IMS.CoreBusiness.Entities;
-using IMS.UseCases.Produces.Interfaces;
+using IMS.UseCases.Activities.Produces.Interfaces;
 using IMS.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 

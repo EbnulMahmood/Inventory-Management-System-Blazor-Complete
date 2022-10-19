@@ -1,13 +1,13 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.PluginIRepositories;
-using IMS.UseCases.Purchases.Interfaces;
+using IMS.UseCases.Activities.Purchases.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.UseCases.Purchases
+namespace IMS.UseCases.Activities.Purchases
 {
     public class PurchaseInventoryUseCase : IPurchaseInventoryUseCase
     {
