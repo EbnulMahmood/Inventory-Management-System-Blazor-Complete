@@ -23,7 +23,7 @@ namespace IMS.UseCases.Produces.Validations
             var productToValidate = await _productRepository.GetProductByIdAsync(product.Id);
             foreach (var item in productToValidate.ProductInventories)
             {
-                if (item.InventoryQuantity * quantity > item.Inventory.Quantity)
+                if ((item.InventoryQuantity * quantity) > item.Inventory.Quantity)
                 {
                     return false;
                 }

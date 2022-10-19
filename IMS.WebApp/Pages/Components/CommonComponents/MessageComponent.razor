@@ -1,0 +1,8 @@
+﻿@inherits MessageComponentBase
+
+@if (Type != null)
+{
+    <div class="alert alert-@Type" role="alert">
+        @Message
+    </div>
+}

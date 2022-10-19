@@ -9,16 +9,34 @@ namespace IMS.WebApp.Pages.Produces
     {
         protected ProduceViewModel produceViewModel = new();
         protected Product? SelectedProduct { get; private set; }
+        protected string Message = string.Empty;
+        protected string? MessageType = null;
         [Inject]
-        public IProduceProductUseCase ProduceProductUseCase { get; set; }
+        public IProduceProductUseCase ProduceProductUseCase { get; private set; }
+        [Inject]
+        public IValidateEnoughInventoriesForProducingUseCase ValidateEnoughInventoriesForProducingUseCase
+            { get; private set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         private const string _productsUrl = "/products";
 
         public async Task OnValidSubmit()
         {
-            await ProduceProductUseCase.ExecuteAsync(produceViewModel.ProductionNumber, SelectedProduct,
-                produceViewModel.QuantityToProduce, "Frank");
+            if (!await ValidateEnoughInventoriesForProducingUseCase
+                .ExecuteAsync(SelectedProduct, produceViewModel.QuantityToProduce))
+            {
+                MessageType = "danger";
+                Message = $"The inventories are not enough for producing {SelectedProduct.Name}" +
+                    $" X {produceViewModel.QuantityToProduce} times";
+                return;
+            }
+            else
+            {
+                MessageType = "success";
+                Message = $"{SelectedProduct.Name} produced successfully {produceViewModel.QuantityToProduce} times";
+                await ProduceProductUseCase.ExecuteAsync(produceViewModel.ProductionNumber, SelectedProduct,
+                    produceViewModel.QuantityToProduce, "Frank");
+            }
 
             produceViewModel = new();
             SelectedProduct = null;
