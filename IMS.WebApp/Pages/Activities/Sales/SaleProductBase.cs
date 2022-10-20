@@ -1,10 +1,12 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.Activities.Sales.Interfaces;
 using IMS.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace IMS.WebApp.Pages.Activities.Sales
 {
+    [Authorize]
     public class SaleProductBase : ComponentBase
     {
         protected SaleViewModel saleViewModel = new();

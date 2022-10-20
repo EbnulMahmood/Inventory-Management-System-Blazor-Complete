@@ -1,10 +1,12 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.Activities.Purchases.Interfaces;
 using IMS.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace IMS.WebApp.Pages.Activities.Purchases
 {
+    [Authorize]
     public class PurchaseInventoryBase : ComponentBase
     {
         [Inject]

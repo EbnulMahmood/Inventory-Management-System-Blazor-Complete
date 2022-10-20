@@ -1,10 +1,12 @@
 ﻿using IMS.CoreBusiness.Entities;
 using IMS.UseCases.Activities.Produces.Interfaces;
 using IMS.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace IMS.WebApp.Pages.Activities.Produces
 {
+    [Authorize]
     public class ProduceProductBase : ComponentBase
     {
         protected ProduceViewModel produceViewModel = new();
