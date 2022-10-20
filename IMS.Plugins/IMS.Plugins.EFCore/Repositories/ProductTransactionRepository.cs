@@ -2,6 +2,7 @@
 using IMS.CoreBusiness.Enums;
 using IMS.Plugins.EFCore.Data;
 using IMS.UseCases.PluginIRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMS.Plugins.EFCore.Repositories
 {
@@ -16,6 +17,25 @@ namespace IMS.Plugins.EFCore.Repositories
             _productRepository = productRepository;
         }
 
+        public async Task<IEnumerable<ProductTransaction>> ListProductTransactionsAsync(string productName, 
+            DateTime? dateFrom, DateTime? dateTo, ProductTransactionType? transactionType)
+        {
+            if (dateTo.HasValue) dateTo = dateTo.Value.AddDays(1);
+
+            var query = from productTransactions in _context.ProductTransactions
+                        join product in _context.Products
+                        on productTransactions.ProductId equals product.Id
+                        where 
+                            (string.IsNullOrWhiteSpace(productName) ||
+                            product.Name.Contains(productName, StringComparison.OrdinalIgnoreCase)) &&
+                            (!dateFrom.HasValue || productTransactions.TransactionDate >= dateFrom.Value.Date) &&
+                            (!dateTo.HasValue || productTransactions.TransactionDate >= dateTo.Value.Date) &&
+                            (!transactionType.HasValue || productTransactions.ActivityType == transactionType)
+                        select productTransactions;
+
+            return await query.Include(x => x.Product).ToListAsync();
+        }
+
         public async Task ProduceAsync(string productionNumber, Product product, int quantity,
             double price, string doneBy)
         {
@@ -24,9 +44,25 @@ namespace IMS.Plugins.EFCore.Repositories
             {
                 foreach(var item in productToSave.ProductInventories)
                 {
+                    int quantityBefore = item.Inventory.Quantity;
+
                     item.Inventory.Quantity -= quantity * item.InventoryQuantity;
+                    
+                    await _context.InventoryTransactions.AddAsync(new InventoryTransaction()
+                    {
+                        ProductionNumber = productionNumber,
+                        InventoryId = item.Inventory.Id,
+                        Inventory = item.Inventory,
+                        QuantityBefore = quantityBefore,
+                        ActivityType = InventoryTransactionType.ProduceProduct,
+                        QuantityAfter = item.Inventory.Quantity,
+                        TransactionDate = DateTime.Now,
+                        UnitPrice = price,
+                        DoneBy = doneBy,
+                    });
                 }
             }
+
 
             await _context.ProductTransactions.AddAsync(new ProductTransaction()
             {
@@ -44,7 +80,8 @@ namespace IMS.Plugins.EFCore.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task SaleProductAsync(string salesOrderNumber, Product product, int quantity, double price, string doneBy)
+        public async Task SaleProductAsync(string salesOrderNumber, Product product, 
+            int quantity, double price, string doneBy)
         {
             await _context.ProductTransactions.AddAsync(new ProductTransaction()
             {
@@ -52,6 +89,7 @@ namespace IMS.Plugins.EFCore.Repositories
                 ProductId = product.Id,
                 Product = product,
                 QuantityBefore = product.Quantity,
+                ActivityType= ProductTransactionType.SaleProduct,   
                 QuantityAfter = product.Quantity - quantity,
                 TransactionDate = DateTime.Now,
                 DoneBy = doneBy,

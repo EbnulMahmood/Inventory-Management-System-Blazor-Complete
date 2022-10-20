@@ -3,7 +3,7 @@ using IMS.UseCases.Activities.Sales.Interfaces;
 using IMS.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Pages.Sales
+namespace IMS.WebApp.Pages.Activities.Sales
 {
     public class SaleProductBase : ComponentBase
     {

@@ -3,7 +3,7 @@ using IMS.UseCases.Activities.Produces.Interfaces;
 using IMS.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 
-namespace IMS.WebApp.Pages.Produces
+namespace IMS.WebApp.Pages.Activities.Produces
 {
     public class ProduceProductBase : ComponentBase
     {

@@ -18,6 +18,7 @@ namespace IMS.CoreBusiness.Entities
         [Required]
         public int QuantityAfter { get; set; }
         public string ProductionNumber { get; set; } = string.Empty;
+        public string PurchaseNumber { get; set; } = string.Empty;
         public double? UnitPrice { get; set; }
         [Required]
         public DateTime TransactionDate { get; set; }

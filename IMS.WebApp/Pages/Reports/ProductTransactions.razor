@@ -1,0 +1,95 @@
+﻿@page "/productTransactions"
+@using IMS.CoreBusiness.Enums
+
+@inherits ProductTransactionsBase
+
+<PageTitle>Product Transactions</PageTitle>
+
+<h3>Product Transactions List</h3>
+
+<div class="row pt-2">
+    <div class="col">
+        <label for="product-name">Name</label>
+        <input id="product-name" type="text" class="form-control" @bind-value="ProductName" />
+    </div>
+    <div class="col">
+        <label for="date-from">Date From</label>
+        <input id="date-from" type="date" class="form-control" @bind-value="DateFrom" />
+    </div>
+    <div class="col">
+        <label for="date-to">Date To</label>
+        <input id="date-to" type="date" class="form-control" @bind-value="DateTo" />
+    </div>
+    <div class="col">
+        <label for="activity">Activity Type</label>
+        <select id="activity" class="form-control" @bind="ActivityTypeId">
+            <option value="-1" disabled>--Select Activity--</option>
+            <option value="1">Produce Product</option>
+            <option value="2">Sale Product</option>
+        </select>
+    </div>
+    <div class="col">
+        <label for="button">&nbsp;</label>
+        <button type="button"
+                id="button"
+                class="btn btn-primary form-control"
+                @onclick="async () => await SearchProductsAsync()">
+            Search
+        </button>
+    </div>
+    <div class="col">
+        <label for="button">&nbsp;</label>
+        <button type="button"
+                id="button"
+                class="btn btn-primary form-control"
+                @onclick="async () => await PrintProductsAsync()">
+            Print
+        </button>
+    </div>
+</div>
+
+<div id="print-area" class="pt-4">
+    @if (ProductTransactions == null || ProductTransactions.Count() <= 0)
+    {
+        <ItemsNotFoundComponent />
+    }
+    else
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Qty Before</th>
+                    <th scope="col">Qty After</th>
+                    <th scope="col">Sale #</th>
+                    <th scope="col">Production #</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ProductTransactions)
+                {
+                    <tr>
+                        <td>@item.TransactionDate.ToString("MM/dd/yyyyy")</td>
+                        <td>@item.Product.Name</td>
+                        <td>
+                            @if (item.ActivityType == ProductTransactionType.SaleProduct)
+                            {
+                                <text>Sale</text>
+                            }
+                            else if (item.ActivityType == ProductTransactionType.ProduceProduct)
+                            {
+                                <text>Produce</text>
+                            }
+                        </td>
+                        <td>@item.QuantityBefore</td>
+                        <td>@item.QuantityAfter</td>
+                        <td>@item.SaleOrderNumber</td>
+                        <td>@item.ProductionNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

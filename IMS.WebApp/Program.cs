@@ -66,6 +66,7 @@ builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
 builder.Services.AddTransient<ISaleProductUseCase, SaleProductUseCase>();
 // Reports
 builder.Services.AddTransient<IListInventoryTransactionsUseCase, ListInventoryTransactionsUseCase>();
+builder.Services.AddTransient<IListProductTransactionsUseCase, ListProductTransactionsUseCase>();
 
 var app = builder.Build();
 

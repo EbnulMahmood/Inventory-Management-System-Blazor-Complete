@@ -7,7 +7,7 @@
 
 <div class="pt-4">
     <ViewInventoriesComponent OnSearchInventories="OnSearchInventories" />
-    @if (Inventories == null || Inventories.Count() < 0)
+    @if (Inventories == null || Inventories.Count() <= 0)
     {
         <ItemsNotFoundComponent />
     }
